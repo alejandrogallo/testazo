@@ -26,11 +26,15 @@ $(TEST_SCRIPT): $(MAIN_BIN)
 clean-test:
 	-rm $(TEST_SCRIPT)
 
-test: clean-test $(TEST_SCRIPT)
+test: clean-test $(TEST_SCRIPT) ## Run tests in test
 	@./test/testazo.sh
 
-test-debug: $(TEST_SCRIPT)
+test-debug: clean-test $(TEST_SCRIPT)
 	@./test/testazo.sh -d
 
-test-list: $(TEST_SCRIPT)
+test-list: clean-test $(TEST_SCRIPT)
 	@./test/testazo.sh -l
+
+help: ## Prints help for targets with comments
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+

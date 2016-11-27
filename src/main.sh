@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+#set -x
+
 include() { source $@; }
 
 # main logging functions
@@ -112,7 +114,7 @@ run_testScript() {
   testName=$(basename ${testScript})
   testDescription=$(get_description ${testScript})
   TEST_RESULT=1
-  header "Testing ${testScript#${MAIN_TEST_FOLDER}/} ... "
+  header "Testing ${testName} ... "
   arrow "${testDescription}"
   print_long_description ${testScript}
   cd ${testFolder}
@@ -230,7 +232,7 @@ arrow "Sourcing ${LOCAL_CONFIG} file"
 
 # run the tests
 for TEST_SCRIPT in ${ALL_SCRIPTS[@]}; do
-  run_testScript ${TEST_SCRIPT}
+  run_testScript ${TEST_SCRIPT};
 done
 
 header "${#ALL_SCRIPTS[@]} tests DONE for class '${TEST_CLASS}'"
