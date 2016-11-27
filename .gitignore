@@ -2,3 +2,5 @@ build
 
 test/testazo.sh
 test/test.out
+
+dist
