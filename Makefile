@@ -2,7 +2,7 @@ PREFIX   ?= /usr/bin
 DIST     ?= dist
 SRC      ?= src
 BUILD    ?= build
-BIN_NAME ?= testaco.sh
+BIN_NAME ?= testazo.sh
 MAIN_BIN ?= $(DIST)/$(BIN_NAME)
 
 SOURCES  ?= $(wildcard $(SRC)/*)
