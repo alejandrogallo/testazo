@@ -65,7 +65,7 @@ get_classes() {
 
 get_description() {
   local testScript=$1
-  grep "TEST_DESCRIPTION=" ${testScript} | sed "s/.*TEST_DESCRIPTION=//" | tr -d "\""
+  grep -E "TEST_DESCRIPTION\s*=\s*" ${testScript} | sed "s/.*TEST_DESCRIPTION\s*=\s*//" | tr -d "\""
 }
 
 print_long_description() {
@@ -118,6 +118,7 @@ run_testScript() {
   cd ${testFolder}
   if [[ -x ${testName} ]]; then
     ./${testName} > ${TEST_OUT_FILE}
+    TEST_RESULT=$?
   else
     source ${testName} > ${TEST_OUT_FILE}
   fi
