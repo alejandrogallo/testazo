@@ -11,7 +11,7 @@ declare -r TEST_NAME=doTest.sh
 declare -r MAIN_TEST_FOLDER=$(dirname $(readlink -f $0))
 declare -r CLASS_MAGIC_WORD="@CLASS"
 declare -r ALL_CLASS=all
-declare -r GH_DIST="https://github.com/alejandrogallo/testazo/raw/master/dist/testazo.sh"
+declare -r GH_DIST="https://raw.githubusercontent.com/alejandrogallo/testazo/master/dist/testazo.sh"
 
 # GLOBAL VARIABLES
 TEST_RESULT=1
@@ -32,7 +32,9 @@ declare -r __OPTIONS=":hvt:ld"
 
 update() {
   wget "${GH_DIST}" -O "${MAIN_TEST_FOLDER}/${__SCRIPT_NAME}"
+  return $?
 }
+
 echo_debug() {
   [[ -n ${TEST_DEBUG} ]] || return 0
   if [[ -z $1 ]]; then
@@ -162,6 +164,12 @@ $(usage_head)
 
 EOF
 }    # ----------  end of usage  ----------
+
+if [[ $1 == update ]]; then
+  arrow "Updating from ${GH_DIST}"
+  update
+  exit $?
+fi
 
 while getopts $__OPTIONS opt
 do

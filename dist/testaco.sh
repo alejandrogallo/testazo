@@ -35,7 +35,9 @@ declare -r __OPTIONS=":hvt:ld"
 
 update() {
   wget "${GH_DIST}" -O "${MAIN_TEST_FOLDER}/${__SCRIPT_NAME}"
+  return $?
 }
+
 echo_debug() {
   [[ -n ${TEST_DEBUG} ]] || return 0
   if [[ -z $1 ]]; then
@@ -165,6 +167,12 @@ $(usage_head)
 
 EOF
 }    # ----------  end of usage  ----------
+
+if [[ $1 == update ]]; then
+  arrow "Updating from ${GH_DIST}"
+  update
+  exit $?
+fi
 
 while getopts $__OPTIONS opt
 do

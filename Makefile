@@ -8,7 +8,7 @@ MAIN_BIN ?= $(DIST)/$(BIN_NAME)
 SOURCES  ?= $(wildcard $(SRC)/*)
 
 
-.PHONY: clean test test-debug test-list
+.PHONY: clean clean-test test test-debug test-list
 
 .DEFAULT_TARGET = $(MAIN_BIN)
 
@@ -23,7 +23,10 @@ TEST_SCRIPT = test/testazo.sh
 $(TEST_SCRIPT): $(MAIN_BIN)
 	cp $< $@
 
-test: $(TEST_SCRIPT)
+clean-test:
+	-rm $(TEST_SCRIPT)
+
+test: clean-test $(TEST_SCRIPT)
 	@./test/testazo.sh
 
 test-debug: $(TEST_SCRIPT)
