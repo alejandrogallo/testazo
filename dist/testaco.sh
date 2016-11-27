@@ -14,7 +14,7 @@ declare -r TEST_NAME=doTest.sh
 declare -r MAIN_TEST_FOLDER=$(dirname $(readlink -f $0))
 declare -r CLASS_MAGIC_WORD="@CLASS"
 declare -r ALL_CLASS=all
-declare -r GH_DIST="https://github.com/alejandrogallo/testazo/raw/master/dist/testazo.sh"
+declare -r GH_DIST="https://raw.githubusercontent.com/alejandrogallo/testazo/master/dist/testazo.sh"
 
 # GLOBAL VARIABLES
 TEST_RESULT=1
