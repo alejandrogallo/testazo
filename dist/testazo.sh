@@ -263,4 +263,6 @@ if [[ ${FAILED_TEST_COUNT} != 0 && ${TEST_CLASS} == "essential" ]]; then
 EOF
 fi
 
-
+if [[ ! ${#FAILED_TEST_LIST[@]} = 0 ]]; then
+  exit 1
+fi
